@@ -1,0 +1,41 @@
+class PostsController < ApplicationController
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  def index
+    @posts = Post.with_attached_images.includes(:user).order(created_at: :desc)
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = current_user.posts.build(post_params)
+    if @post.save
+      redirect_to post_path(@post), success: '投稿しました'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @post = current_user.posts.find(params[:id])
+  end
+
+  def update
+
+  end
+
+  def show
+
+  end
+
+  def destroy
+
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:body, images: [])
+  end
+end
