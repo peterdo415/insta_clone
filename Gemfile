@@ -78,6 +78,8 @@ group :development do
 
   # erbをチェック
   gem 'erb_lint', require: false
+
+  # gem 'parser', ' 3.1.1'
 end
 
 group :test do
