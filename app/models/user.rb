@@ -17,6 +17,7 @@
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  has_many :posts, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
@@ -24,5 +25,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
-  has_many :posts, depedent: :destroy
+  def owner?(object)
+    object.user_id == id
+  end
 end
