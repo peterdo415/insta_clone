@@ -30,5 +30,3 @@ services:
 volumes:
   bundle:
   mysql_data:
-
-
