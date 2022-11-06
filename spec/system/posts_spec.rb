@@ -42,4 +42,16 @@ RSpec.describe "Posts", type: :system do
       expect(page).not_to have_content post.body
     end
   end
+
+  describe 'ページネーション' do
+    let!(:post) { create(:post, created_at: Time.current.yesterday) }
+    before do
+      create_list(:post, 15)
+    end
+
+    it '16件目のポストが1ページ目に表示されていないこと' do
+      visit '/posts'
+      expect(page).to_not have_css("#post_#{post.id}")
+    end
+  end
 end
