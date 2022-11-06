@@ -8,4 +8,3 @@ puts 'Start inserting seed "users" ...'
   )
   puts "\"#{user.username}\" has created!"
 end
-Footer
