@@ -1,11 +1,14 @@
 class PostsController < ApplicationController
   before_action :require_login, only: %i[new create edit update destroy]
+
   def index
     @pagy, @posts = pagy(Post.with_attached_images.includes(:user).order(created_at: :desc))
   end
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
+    @comment = Comment.new
   end
 
   def new
