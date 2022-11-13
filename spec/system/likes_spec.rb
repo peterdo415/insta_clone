@@ -16,6 +16,13 @@ RSpec.describe "Likes", type: :system do
         end
         sleep 0.1
       }.to change { Like.count }.by(1)
+
+      expect{
+        within "#like_post_#{post.id}" do
+          find('.btn-unlike').click
+        end
+        sleep 0.1
+      }.to change { Like.count }.by(-1)
     end
   end
 end
