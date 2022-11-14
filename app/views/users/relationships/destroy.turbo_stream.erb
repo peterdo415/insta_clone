@@ -1,5 +1,6 @@
 <%= turbo_stream.replace(
   dom_id(@user, 'follow'),
-  partial 'follows',
+  partial: 'follows',
   locals: {user: @user}
-) %>
+  )
+%>

@@ -21,7 +21,7 @@
 #
 FactoryBot.define do
   factory :relationship do
-    followed_id { nil }
-    follower_id { nil }
+    follower { nil }
+    followed { nil }
   end
 end

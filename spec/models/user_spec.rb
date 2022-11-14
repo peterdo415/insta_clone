@@ -16,6 +16,7 @@
 #  index_users_on_username  (username) UNIQUE
 #
 require 'rails_helper'
+require 'debug'
 
 RSpec.describe User, type: :model do
   describe '#like' do
@@ -54,15 +55,18 @@ RSpec.describe User, type: :model do
     let!(:user_a) { create(:user) }
     let!(:user_b) { create(:user) }
     it 'フォローできること' do
-      expect(user_a.follow(user_b)).to change{Relationship.count}.by(1)
+      expect{user_a.follow(user_b)}.to change {Relationship.count}.by(1)
     end
   end
 
   describe '#unfollow' do
     let!(:user_a) { create(:user) }
     let!(:user_b) { create(:user) }
+    before do
+      user_a.follow(user_b)
+    end
     it 'フォローをフォローを外せること' do
-      expect(user_a.unfollow(user_b)).to change {Relationship.count }.by(-1)
+      expect{user_a.unfollow(user_b)}.to change {Relationship.count }.by(-1)
     end
   end
 
@@ -74,7 +78,7 @@ RSpec.describe User, type: :model do
         user_a.follow(user_b)
       end
       it 'trueを返すこと' do
-        expect(user_a.following?).to be true
+        expect(user_a.following?(user_b)).to be true
       end
     end
 
@@ -82,7 +86,7 @@ RSpec.describe User, type: :model do
       let!(:user_a) { create(:user) }
       let!(:user_b) { create(:user) }
       it 'falseを返すこと' do
-        expect(user_a.following?).to be false
+        expect(user_a.following?(user_b)).to be false
       end
     end
   end
