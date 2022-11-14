@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resource :like, only: %i[create destroy], module: :posts
   end
 
+  resources :users, only: %i[index] do
+    resource :relationship, only: %i[create destroy], module: :users
+  end
+
   # Defines the root path route ("/")
   root to: 'posts#index'
 end

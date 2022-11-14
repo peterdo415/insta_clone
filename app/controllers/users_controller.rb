@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+  def index
+    @pagy, @users = pagy(User.order(created_at: :desc))
+  end
+
   def new
     @user = User.new
   end
