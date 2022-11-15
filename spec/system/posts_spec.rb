@@ -54,4 +54,87 @@ RSpec.describe "Posts", type: :system do
       expect(page).to_not have_css("#post_#{post.id}")
     end
   end
+
+  describe '検索' do
+    context '投稿の本文での検索' do
+      let!(:post_a) { create(:post, body: 'aaaa') }
+      let!(:post_b) { create(:post, body: 'bbbb') }
+      let!(:post_c) { create(:post, body: 'cccc') }
+      before do
+        User.all.each { |u| user.follow(u) }
+      end
+      it '投稿の本文での検索ができること' do
+        visit '/posts'
+        find('#search-icon').click
+        within('#searchModal') do
+          fill_in '投稿の本文', with: 'aa'
+          click_on '検索'
+        end
+        expect(page).to have_css "#post_#{post_a.id}"
+        expect(page).not_to have_css "#post_#{post_b.id}"
+        expect(page).not_to have_css "#post_#{post_c.id}"
+      end
+    end
+
+    context '投稿のコメントでの検索' do
+      let!(:post_a) do
+        post = create(:post)
+        create(:comment, post: post, body: 'good')
+        post
+      end
+      let!(:post_b) do
+        post = create(:post)
+        create(:comment, post: post, body: 'nice')
+        post
+      end
+      let!(:post_c) do
+        post = create(:post)
+        create(:comment, post: post, body: 'awesome')
+        post
+      end
+      before do
+        User.all.each { |u| user.follow(u) }
+      end
+      it '投稿のコメントでの検索ができること' do
+        visit '/posts'
+        find('#search-icon').click
+        within('#searchModal') do
+          fill_in 'コメント', with: 'good'
+          click_on '検索'
+        end
+        expect(page).to have_css "#post_#{post_a.id}"
+        expect(page).not_to have_css "#post_#{post_b.id}"
+        expect(page).not_to have_css "#post_#{post_c.id}"
+      end
+    end
+
+    context '投稿者のユーザー名での検索' do
+      let!(:post_a) do
+        user = create(:user, username: 'goku')
+        create(:post, user: user)
+      end
+      let!(:post_b) do
+        user = create(:user, username: 'gohan')
+        create(:post, user: user)
+      end
+      let!(:post_c) do
+        user = create(:user, username: 'goten')
+        create(:post, user: user)
+      end
+      before do
+        User.all.each { |u| user.follow(u) }
+      end
+      it '投稿者のユーザー名での検索ができること' do
+        visit '/posts'
+        find('#search-icon').click
+        within('#searchModal') do
+          fill_in 'ユーザー名', with: 'goku'
+          click_on '検索'
+        end
+        expect(page).to have_css "#post_#{post_a.id}"
+        expect(page).not_to have_css "#post_#{post_b.id}"
+        expect(page).not_to have_css "#post_#{post_c.id}"
+      end
+    end
+  end
 end
