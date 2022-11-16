@@ -3,6 +3,10 @@ class UsersController < ApplicationController
     @pagy, @users = pagy(User.order(created_at: :desc))
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
   end
@@ -16,10 +20,10 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-end
 
-private
+  private
 
-def user_params
-  params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  end
 end
