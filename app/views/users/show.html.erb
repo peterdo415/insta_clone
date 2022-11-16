@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <%= render <%= render partial: 'posts/thumbnail_post', collection: @user.post, as: post %>
+            <%= render partial: 'posts/thumbnail_post', collection: @user.posts, as: :post %>
           </div>
         </div>
       </div>

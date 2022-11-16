@@ -34,9 +34,9 @@
 }
 
 .thumbs::before {
-   content: "";
-   display: block;
-   padding-top: 100%;
+  content: "";
+  display: block;
+  padding-top: 100%;
 }
 
 .thumbs img {

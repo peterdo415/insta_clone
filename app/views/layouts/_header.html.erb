@@ -71,7 +71,7 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuAvatar">
               <li>
-                <a class="dropdown-item" href="#">My profile</a>
+                <%= link_to 'Myprofile', user_path(current_user), class: 'dropdown-item' %>
               </li>
               <li>
                 <a class="dropdown-item" href="#">Settings</a>
