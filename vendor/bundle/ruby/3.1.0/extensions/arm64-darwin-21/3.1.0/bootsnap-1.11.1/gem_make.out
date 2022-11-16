@@ -1,0 +1,15 @@
+current directory: /Users/fujimotokosuke/suparuta_practice/insta_clone_ver7-develop/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.11.1/ext/bootsnap
+/Users/fujimotokosuke/.rbenv/versions/3.1.1/bin/ruby -I /Users/fujimotokosuke/.rbenv/versions/3.1.1/lib/ruby/3.1.0 -r ./siteconf20221025-44537-5kjco4.rb extconf.rb
+creating Makefile
+
+current directory: /Users/fujimotokosuke/suparuta_practice/insta_clone_ver7-develop/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.11.1/ext/bootsnap
+make DESTDIR\= clean
+
+current directory: /Users/fujimotokosuke/suparuta_practice/insta_clone_ver7-develop/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.11.1/ext/bootsnap
+make DESTDIR\=
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/fujimotokosuke/suparuta_practice/insta_clone_ver7-develop/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.11.1/ext/bootsnap
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20221025-44537-ui1fz/bootsnap
