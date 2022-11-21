@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     resource :relationship, only: %i[create destroy], module: :users
   end
 
+  namespace :mypage do
+    root to: 'accounts#edit'
+    resource :account, only: %i[edit update]
+  end
+
   # Defines the root path route ("/")
   root to: 'posts#index'
 end
