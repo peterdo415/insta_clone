@@ -46,3 +46,8 @@
   top: 0;
   object-fit: cover;
 }
+
+
+.object-fit-cover {
+  object-fit: cover;
+}
