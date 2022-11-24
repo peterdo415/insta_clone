@@ -11,5 +11,21 @@
 require 'rails_helper'
 
 RSpec.describe Notification, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#notify' do
+    let!(:notification) { create(:notification) }
+
+    context '引数が単数の場合' do
+      let!(:user) { create(:user) }
+      it '通知が作成されること' do
+        expect{ notification.notify(user) }.to change { UserNotification.count }.by(1)
+      end
+    end
+
+    context '引数がコレクションの場合' do
+      let!(:users) { create_list(:user, 10) }
+      it '通知が作成されること' do
+        expect{ notification.notify(users) }. to change { UserNotification.count }.by(10)
+      end
+    end
+  end
 end

@@ -3,11 +3,22 @@ class Posts::LikesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    current_user.like(@post)
+    # rubocop:disable Style/IfUnlessModifier, Style/GuardClause
+    if current_user.like(@post)
+      create_notifications_about_like(@post)
+    end
+    # rubocop:enable Style/IfUnlessModifier, Style/GuardClause
   end
 
   def destroy
     @post = Post.find(params[:post_id])
     current_user.unlike(@post)
+  end
+
+  private
+
+  def create_notifications_about_like(post)
+    notification = Notification.create!(title: "#{current_user.name}さんがあなたの投稿にいいねしましたの投稿にいいねしました", url: post.url(post))
+    notification.notify(post.user)
   end
 end

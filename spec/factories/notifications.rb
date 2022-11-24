@@ -10,7 +10,7 @@
 #
 FactoryBot.define do
   factory :notification do
-    title { "MyString" }
-    url { "MyString" }
+    title { Faker::Lorem.sentence }
+    url { Faker::Internet.url }
   end
 end
