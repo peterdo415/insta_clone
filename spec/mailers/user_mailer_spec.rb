@@ -1,4 +1,5 @@
 require "rails_helper"
+require 'debug'
 
 RSpec.describe UserMailer, type: :mailer do
   describe '#like_post' do

@@ -19,7 +19,7 @@ class Posts::LikesController < ApplicationController
   private
 
   def create_notifications_about_like(post)
-    notification = Notification.create!(title: "#{current_user.name}さんがあなたの投稿にいいねしましたの投稿にいいねしました", url: post_url(post))
+    notification = Notification.create!(title: "#{current_user.username}さんがあなたの投稿にいいねしましたの投稿にいいねしました", url: post_url(post))
     notification.notify(post.user)
   end
 end
