@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   end
 
   if Rails.env.development?
+    require 'sidekiq/web'
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 
   # Defines the root path route ("/")
