@@ -27,4 +27,4 @@ ja:
       timing_type:
         on_commented: '投稿にコメントがあった時'
         on_liked: '投稿にいいねがあった時'
-        on_followed: 'ファローされた時'
+        on_followed: 'フォローされた時'

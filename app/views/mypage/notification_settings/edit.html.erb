@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <%= form_with model: @user, url: edit_mypage_notification_setting_path do |f| %>
+      <%= form_with model: @user, url: mypage_notification_setting_path do |f| %>
         <%= f.collection_check_boxes :notification_timing_ids, NotificationTiming.all, :id, :timing_type_i18n do |b| %>
           <div class="mb-3">
           <div class="mb-3">
