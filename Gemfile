@@ -52,6 +52,7 @@ gem 'image_processing', '~> 1.2'
 gem 'sorcery'
 
 # 多言語化対応
+gem 'enum_help'
 gem 'rails-i18n'
 
 # ActiveStorage

@@ -63,4 +63,8 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include LoginModule
+
+  config.before :suite do
+    system 'bin/rails db:seed'
+  end
 end

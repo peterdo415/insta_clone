@@ -117,4 +117,48 @@ RSpec.describe User, type: :model do
     it {is_expected.to include post_by_user_b}
     it {is_expected.not_to include post_by_user_c}
   end
+
+  describe "#accepted_notification?" do
+    let!(:user) { create(:user) }
+    context ':on_commented' do
+      before do
+        notification_timing = NotificationTiming.find_by!(timing_type: :on_commented)
+        user.notification_timings << notification_timing
+      end
+
+      it 'コメント時の通知のみを許可していること' do
+        expect(user.accepted_notification?(:on_commented)).to eq true
+        expect(user.accepted_notification?(:on_liked)).to eq false
+        expect(user.accepted_notification?(:on_followed)).to eq false
+      end
+    end
+
+    context ':on_liked' do
+      let!(:user) { create(:user) }
+      before do
+        notification_timing = NotificationTiming.find_by!(timing_type: :on_liked)
+        user.notification_timings << notification_timing
+      end
+
+      it 'いいね時の通知のみを許可していること' do
+        expect(user.accepted_notification?(:on_commented)).to eq false
+        expect(user.accepted_notification?(:on_liked)).to eq true
+        expect(user.accepted_notification?(:on_followed)).to eq false
+      end
+    end
+
+    context ':on_followed' do
+      let!(:user) { create(:user) }
+      before do
+        notification_timing = NotificationTiming.find_by!(timing_type: :on_followed)
+        user.notification_timings << notification_timing
+      end
+
+      it 'いいね時の通知のみを許可指定いること' do
+        expect(user.accepted_notification?(:on_commented)).to eq false
+        expect(user.accepted_notification?(:on_liked)).to eq false
+        expect(user.accepted_notification?(:on_followed)).to eq true
+      end
+    end
+  end
 end
