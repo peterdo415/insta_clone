@@ -72,4 +72,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener_web
 
   config.active_job.queue_adapter = :sidekiq
+
+  config.hosts << '.ngrok.io'
+
 end
