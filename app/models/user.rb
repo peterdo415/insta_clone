@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :user_notifications, dependent: :destroy
   has_many :notifications, through: :user_notifications
+  has_many :user_notification_timings, dependent: :destroy
+  has_many :notification_timings, through: :user_notification_timings
   has_one_attached :avatar
 
   validates :username, presence: true, uniqueness: true
@@ -78,5 +80,9 @@ class User < ApplicationRecord
 
   def feed
     Post.where(user_id: following_ids << id)
+  end
+
+  def accepted_notification?(type)
+    notification_timings.find_by(timing_type: type).present?
   end
 end
